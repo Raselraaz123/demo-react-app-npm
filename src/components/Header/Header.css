@@ -1,0 +1,18 @@
+.header{
+  height: 80px;
+  background-color:#1C2B35 ;
+  padding-left: 100px;
+  padding-right: 100px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.menu-item a{
+  color: #FFFFFF;
+  text-decoration: none;
+  margin-left:36px ;
+  font-size: 17px;
+}
+.menu-item a:hover{
+  color: orange;
+}
