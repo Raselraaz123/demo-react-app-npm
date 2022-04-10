@@ -9,6 +9,12 @@
   justify-content: center;
   box-shadow: -10px 10px  #FFE0B3;
 }
+.form-container:hover{
+  box-shadow: -10px 10px  #5c3803;
+}
+
+
+
 .form-title{
   font-family: 'Lato';
 font-style: normal;
@@ -30,6 +36,7 @@ font-size: 35px;
 box-sizing: border-box;
 border-radius: 5px;
 font-size: 24px;
+padding-left: 10px;
 }
 .form-submit{
   width: 415px;

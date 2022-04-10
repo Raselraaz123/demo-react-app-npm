@@ -1,29 +1,48 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './SignUp.css'
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./SignUp.css";
+import auth from "../../firebase.init";
+
+
 const SignUp = () => {
-  const [email,setEmail] = useState('');
-  const [password,setPassword] = useState('');
-  const [confirmPassword,setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigete = useNavigate();
+
+  const [createUserWithEmailAndPassword,user] =useCreateUserWithEmailAndPassword(auth);
+
+  const handleEmailBlur = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordBlur = (event) => {
+    setPassword(event.target.value);
+  };
+  const handleConfirmPassword = (event) => {
+    setConfirmPassword(event.target.value);
+  };
   
 
-  const handleEmailBlur = event => {
-    setEmail(event.target.value);
+  if (user) {
+  navigete("/shop");
 }
-
-  const handlePasswordBlur = event => {
-    setPassword(event.target.value);
-  }
-  const handleConfirmPassword = event => {
-    setConfirmPassword(event.target.value);
-  }
 
   const handleCreateUser = event => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      setError('your to password did not match')
+      setError("your to password did not match");
+      return;
     }
+    if (password.length < 6) {
+      setError('password must be 6 characters ot longer');
+      return;
+    }
+
+    createUserWithEmailAndPassword(email, password);
+  
   }
 
   return (
@@ -61,7 +80,8 @@ const SignUp = () => {
               required
             />
           </div>
-          <p style={{color:'red'}}>{ error}</p>
+          <p style={{ color: "red" }}>{error}</p>
+   
           <input className="form-submit" type="submit" value="Sign Up" />
         </form>
         <p>
